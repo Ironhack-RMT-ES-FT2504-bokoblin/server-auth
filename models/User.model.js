@@ -5,12 +5,16 @@ const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema(
   {
+    username: {
+      type: String,
+      required: [true, 'Username is required.'],
+    },
     email: {
       type: String,
       required: [true, 'Email is required.'],
       unique: true,
-      lowercase: true,
-      trim: true
+      lowercase: true, // esto no es validación, el sistema lo convierte en miniscula
+      trim: true // esto no es validación, el sistema lo convierte removiendo los espacios vacios
     },
     password: {
       type: String,
