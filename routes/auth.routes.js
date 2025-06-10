@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 
 const User = require("../models/User.model");
-const verifyToken = require("../middlewares/auth.middlewares");
+const { verifyToken } = require("../middlewares/auth.middlewares");
 
 // POST "/api/auth/signup" => Ruta para registrar un usuario
 router.post("/signup", async(req, res, next) => {
@@ -90,7 +90,7 @@ router.post("/login", async (req, res, next) => {
     const payload = {
       _id: foundUser._id, // requerido
       email: foundUser.email, // opcional
-      // si tuvieramos roles, estarian aqui.
+      role: foundUser.role
     }
 
     const authToken = jwt.sign( payload, process.env.TOKEN_SECRET, { 

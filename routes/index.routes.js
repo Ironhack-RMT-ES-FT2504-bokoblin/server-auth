@@ -10,7 +10,7 @@ const authRouter = require("./auth.routes")
 router.use("/auth", authRouter)
 
 
-const verifyToken = require("../middlewares/auth.middlewares")
+const { verifyToken, verifyAdmin } = require("../middlewares/auth.middlewares")
 // EJEMPLO DE RUTA PRIVADA (NO DEBEMOS TENERLA EN PROYECTO)
 router.get("/ejemplo-ruta-privada", verifyToken, (req, res, next) => {
 
@@ -21,6 +21,12 @@ router.get("/ejemplo-ruta-privada", verifyToken, (req, res, next) => {
   res.send("Aqui tienes esta información es que es privada solo para usuario logeados")
 })
 
+
+// EJEMPLO DE RUTA PRIVADA SOLO PARA ADMINS (ESTO ES UN EJEMPLO) 
+router.delete("/ejemplo-ruta-admin-borrar-usuarios", verifyToken, verifyAdmin, (req, res, next) => {
+
+  res.send("has borrado un usuario") // ejemplo de accion
+})
 
 module.exports = router;
 
